@@ -11,19 +11,19 @@ Version
 Installation
 --------------
 
-Use [Composer](http://getcomposer.org) to install the VatsimXmlfeeds and dependencies.
+Use [Composer](http://getcomposer.org) to install the VatsimXML and dependencies.
 
 ```sh
-$ composer require vatsim/xmlfeeds 1.*
+$ composer require vatsim/xml 1.*
 ```
 
 ### Laravel
 #### Set up
-Using VatsimXmlfeeds in Laravel is made easy through the use of Service Providers. Add the service provider to your `app/config/app.php` file:
+Using VatsimXML in Laravel is made easy through the use of Service Providers. Add the service provider to your `app/config/app.php` file:
 ```php
 'providers' => array(
     // ...
-    'Vatsim\Xmlfeeds\XmlfeedsServiceProvider',
+    'Vatsim\Xml\XmlServiceProvider',
 ),
 ```
 
@@ -31,7 +31,7 @@ Followed by the alias:
 ```php
 'aliases' => array(
     // ...
-    'VatsimXmlfeeds'       => 'Vatsim\Xmlfeeds\Facades\Xmlfeeds',
+    'VatsimXML'       => 'Vatsim\Xml\Facades\Xml',
 ),
 ```
 
