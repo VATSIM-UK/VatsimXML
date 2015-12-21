@@ -1,12 +1,12 @@
 VatsimXMLFeeds
 =========
 
-The Vatsim Xmlfeeds package is a useful laravel package for accessing data publically presented via VATSIMs XML feeds.
+The Vatsim Xmlfeeds package is a useful laravel 5 package for accessing data publically presented via VATSIMs XML feeds.
 
 Version
 ----
 
-1.0
+2.0
 
 Installation
 --------------
@@ -14,12 +14,12 @@ Installation
 Use [Composer](http://getcomposer.org) to install the VatsimXML and dependencies.
 
 ```sh
-$ composer require vatsim/xml 1.*
+$ composer require vatsim/xml 2.*
 ```
 
 ### Laravel
 #### Set up
-Using VatsimXML in Laravel is made easy through the use of Service Providers. Add the service provider to your `app/config/app.php` file:
+Using VatsimXML in Laravel is made easy through the use of Service Providers. Add the service provider to your `config/app.php` file:
 ```php
 'providers' => array(
     // ...
