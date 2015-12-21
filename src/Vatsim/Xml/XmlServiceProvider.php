@@ -22,9 +22,18 @@ class XmlServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->publishes([
-			$this->dir("config/config.php") => config_path("vatsim-xml.php"),
-		]);
+		$request = $this->app['request'];
+		
+		// Lumen users need to copy the config themselves
+		// And it needs to pulled completely differently.
+		// So more work required. Luckily barryvdh had the answer - so thanks.
+		if(str_contains($this->app->version(), "Lumen")){
+			$this->app->configure("vatsim-xml.php");
+		} else {
+			$this->publishes([
+				$this->dir("config/config.php") => config_path("vatsim-xml.php"),
+			]);
+		}
 	}
 
 	/**
