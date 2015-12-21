@@ -24,6 +24,7 @@ class XmlServiceProvider extends ServiceProvider {
 	{
 		$this->publishes([
 			$this->dir("config/config.php") => config_path("vatsim-xml.php"),
+		]);
 	}
 
 	/**
