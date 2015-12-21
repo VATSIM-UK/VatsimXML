@@ -10,6 +10,10 @@ class XmlServiceProvider extends ServiceProvider {
 	 * @var bool
 	 */
 	protected $defer = false;
+	
+	public function dir($path){
+		return __DIR__."/../../".$path;
+	}
 
 	/**
 	 * Bootstrap the application events.
@@ -18,7 +22,8 @@ class XmlServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('vatsim/xml');
+		$this->publishes([
+			$this->dir("config/config.php") => config_path("vatsim-xml.php"),
 	}
 
 	/**
@@ -30,7 +35,7 @@ class XmlServiceProvider extends ServiceProvider {
 	{
 		$this->app['vatsimxml'] = $this->app->share(function($app)
 		{
-			return new XML( $app['config']->get('xml::config') );
+			return new XML( $app['config']->get('vatsim-xml.config') );
 		});
 	}
 
