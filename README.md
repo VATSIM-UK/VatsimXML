@@ -6,7 +6,7 @@ The Vatsim Xmlfeeds package is a useful laravel 5 package for accessing data pub
 Version
 ----
 
-2.0
+2.2 (Lumen Supported)
 
 Installation
 --------------
