@@ -18,7 +18,9 @@ class XmlServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('vatsim/xml');
+		$this->publishes([
+			__DIR__.'/../../config/config.php' => config_path('vatsim-xml.php')
+		]);
 	}
 
 	/**
@@ -28,9 +30,13 @@ class XmlServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+		$this->mergeConfigFrom(
+			__DIR__.'/../../config/config.php', 'vatsimxml'
+		);
+
 		$this->app['vatsimxml'] = $this->app->share(function($app)
 		{
-			return new XML( $app['config']->get('xml::config') );
+			return new XML($app['config']->get('vatsimxml'));
 		});
 	}
 
