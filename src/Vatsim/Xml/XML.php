@@ -14,8 +14,13 @@ class XML {
         }
         
         // let's load the URL!
+        $context = stream_context_create(['ssl' => [
+                'verify_peer' => true,
+                'allow_self_signed' => true,
+                'CN_match' => 'cert.vatsim.net',
+        ]]);
         $url = sprintf($this->_urls[$url], $cid);
-        $xml = new SimpleXMLElement(file_get_contents($url));
+        $xml = new SimpleXMLElement(file_get_contents($url, false, $context));
         
         if(!isset($xml->user) OR !isset($xml->user[0])){
             throw new VatsimXMLExpception("Invalid response received: ".$url);
