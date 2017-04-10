@@ -22,9 +22,7 @@ class XmlServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->publishes([
-			__DIR__.'/../../config/config.php' => config_path('vatsim-xml.php')
-		]);
+
 	}
 
 	/**
@@ -47,7 +45,7 @@ class XmlServiceProvider extends ServiceProvider {
 			]);
 		}
 
-		$this->app['vatsimxml'] = $this->app->share(function($app){
+		$this->app['vatsimxml'] = $this->app->singleton('vatsimxml', function($app){
 			return new XML( $this->app["config"]->get("vatsim-xml") );
 		});
 	}
@@ -59,7 +57,7 @@ class XmlServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array("vatsimxml");
+		return [XML::class];
 	}
 
 }
