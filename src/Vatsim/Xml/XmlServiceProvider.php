@@ -43,9 +43,13 @@ class XmlServiceProvider extends ServiceProvider {
 			$this->publishes([
 				$this->dir("config/config.php") => config_path("vatsim-xml.php"),
 			]);
+
+            $this->mergeConfigFrom(
+                __DIR__ . '/../../config/config.php', 'vatsim-xml'
+            );
 		}
 
-		$this->app['vatsimxml'] = $this->app->singleton('vatsimxml', function($app){
+		$this->app->singleton('vatsimxml', function($app){
 			return new XML( $this->app["config"]->get("vatsim-xml") );
 		});
 	}
