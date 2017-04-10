@@ -10,6 +10,10 @@ class XmlServiceProvider extends ServiceProvider {
 	 * @var bool
 	 */
 	protected $defer = false;
+	
+	public function dir($path){
+		return __DIR__."/../../".$path;
+	}
 
 	/**
 	 * Bootstrap the application events.
@@ -30,13 +34,21 @@ class XmlServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->mergeConfigFrom(
-			__DIR__.'/../../config/config.php', 'vatsimxml'
-		);
+		$request = $this->app['request'];
 
-		$this->app['vatsimxml'] = $this->app->share(function($app)
-		{
-			return new XML($app['config']->get('vatsimxml'));
+		// Lumen users need to copy the config themselves
+		// And it needs to pulled completely differently.
+		// So more work required. Luckily barryvdh had the answer - so thanks.
+		if(str_contains($this->app->version(), "Lumen")){
+			$this->app->configure("vatsim-xml");
+		} else {
+			$this->publishes([
+				$this->dir("config/config.php") => config_path("vatsim-xml.php"),
+			]);
+		}
+
+		$this->app['vatsimxml'] = $this->app->share(function($app){
+			return new XML( $this->app["config"]->get("vatsim-xml") );
 		});
 	}
 
